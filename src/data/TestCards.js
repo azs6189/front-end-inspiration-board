@@ -1,0 +1,9 @@
+[
+  { card_id: 1, message: 'Reach for the start', likes_count: 0 },
+  { card_id: 2, message: 'You can do it!', likes_count: 0 },
+  { card_id: 3, message: 'Pikachu', likes_count: 0 },
+  { card_id: 4, message: 'Tiger Woods', likes_count: 0 },
+  { card_id: 5, message: 'The Alchemist', likes_count: 0 },
+  { card_id: 6, message: 'Charizard', likes_count: 0 },
+  { card_id: 7, message: 'Blink by Malcolm Gladwell', likes_count: 0 },
+];

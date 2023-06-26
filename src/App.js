@@ -1,4 +1,6 @@
 import './App.css';
+import TestBoards from TestBoards.js;
+import TestCards from TestCards.js;
 
 function App() {
   // Components possibly needed:
