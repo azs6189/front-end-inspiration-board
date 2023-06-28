@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import './App.css';
-import TestBoards from 'data/TestBoards.js';
-import TestCards from 'data/TestCards.js';
+import TestBoards from './data/TestBoards.json';
+import TestCards from './data/TestCards.json';
+import BoardList from './components/BoardList.js';
 
 function App() {
+  const [activeBoard, setActiveBoard] = useState({ title: '', owner: '' });
   // Components possibly needed:
 
   // Board
@@ -26,7 +29,21 @@ function App() {
   //// Card form has an input for message
   //// Submitting creates a new card associated with the active board
 
-  return <div className='App'></div>;
+  return (
+    <div className='App'>
+      <h1>Inspiration Board</h1>
+      <ol>
+        <BoardList
+          data={TestBoards}
+          boardUpdate={(boardData) => setActiveBoard(boardData)}
+        />
+      </ol>
+      <h2>Selected Board</h2>
+      <p>
+        {activeBoard.name} - {activeBoard.owner}
+      </p>
+    </div>
+  );
 }
 
 export default App;
