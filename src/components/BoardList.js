@@ -8,6 +8,7 @@ const BoardList = ({ data, boardUpdate }) => {
       <Board
         name={board.title}
         owner={board.owner}
+        cards={board.cards}
         key={board.board_id}
         update={boardUpdate}
       />

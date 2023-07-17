@@ -5,7 +5,11 @@ import TestCards from './data/TestCards.json';
 import BoardList from './components/BoardList.js';
 
 function App() {
-  const [activeBoard, setActiveBoard] = useState({ title: '', owner: '' });
+  const [activeBoard, setActiveBoard] = useState({
+    title: '',
+    owner: '',
+    cards: [],
+  });
   // Components possibly needed:
 
   // Board
@@ -42,6 +46,12 @@ function App() {
       <p>
         {activeBoard.name} - {activeBoard.owner}
       </p>
+      <h2>Cards for {activeBoard.name}</h2>
+      <ul>
+        {activeBoard.cards.map((card) => {
+          return <li>{card.message}</li>;
+        })}
+      </ul>
     </div>
   );
 }
