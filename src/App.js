@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import TestBoards from './data/TestBoards.json';
-import TestCards from './data/TestCards.json';
 import BoardList from './components/BoardList.js';
+import Card from './components/Card.js';
+import axios from 'axios';
+
+const URL = 'http://localhost:5000';
 
 function App() {
   const [activeBoard, setActiveBoard] = useState({
@@ -10,19 +13,29 @@ function App() {
     owner: '',
     cards: [],
   });
-  // Components possibly needed:
+  const [boards, setBoards] = useState([]);
+  const [cards, setCards] = useState([]);
+  const onBoardSelect = (boardData) => {
+    setActiveBoard(boardData);
+    setCards(boardData.cards);
+  };
 
-  // Board
-  //// Each Board is an <li> element
-  //// Clicking on the name of a board changes the active board
-
-  // Card
-  //// You can click a "like" button to update likes on a card
-  //// Each card is associated with a single board
-
-  // BoardList (under "Boards" heading in demo)
-
-  // CardList (under "Cards for ${}" heading in demo)
+  useEffect(() => {
+    axios
+      .get(`${URL}/boards`)
+      .then((response) => {
+        const newBoards = response.data.map((board) => {
+          return {
+            board_id: board.board_id,
+            owner: board.owner,
+            title: board.title,
+            cards: board.cards,
+          };
+        });
+        setBoards(newBoards);
+      })
+      .catch((err) => console.log(err));
+  }, [activeBoard]);
 
   // BoardForm
   //// Board form has inputs for title and owner, both required
@@ -33,14 +46,33 @@ function App() {
   //// Card form has an input for message
   //// Submitting creates a new card associated with the active board
 
+  const onCardLike = (card) => {
+    axios
+      .put(`${URL}/cards/${card.card_id}/add_like`)
+      .then((response) => {
+        setCards(
+          cards.map((newCard) => {
+            return newCard.card_id === card.card_id ? response.data : newCard;
+          })
+        );
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const onCardDelete = (card_id) => {
+    axios
+      .delete(`${URL}/cards/${card_id}`)
+      .then(() => {
+        setCards(cards.filter((card) => card.card_id != card_id));
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className='App'>
       <h1>Inspiration Board</h1>
       <ol>
-        <BoardList
-          data={TestBoards}
-          boardUpdate={(boardData) => setActiveBoard(boardData)}
-        />
+        <BoardList data={boards} boardUpdate={onBoardSelect} />
       </ol>
       <h2>Selected Board</h2>
       <p>
@@ -48,8 +80,15 @@ function App() {
       </p>
       <h2>Cards for {activeBoard.name}</h2>
       <ul>
-        {activeBoard.cards.map((card) => {
-          return <li>{card.message}</li>;
+        {cards.map((card) => {
+          return (
+            <Card
+              card={card}
+              key={card.card_id}
+              onLike={onCardLike}
+              onDelete={onCardDelete}
+            />
+          );
         })}
       </ul>
     </div>

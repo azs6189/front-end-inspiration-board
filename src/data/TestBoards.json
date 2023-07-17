@@ -24,7 +24,7 @@
     "owner": "Jamal",
     "title": "Books to Read",
     "cards": [
-      { "card_id": 5, "message": "The Alchemist", "likes_count": 0, "board_id": 3 },
+      { "card_id": 5, "message": "The Alchemist", "likes_count": 4, "board_id": 3 },
       {
         "card_id": 7,
         "message": "Blink by Malcolm Gladwell",
