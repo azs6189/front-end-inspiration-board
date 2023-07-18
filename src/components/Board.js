@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 //// Each Board is an <li> element
 //// Clicking on the name of a board changes the active board
 
-const Board = ({ name, owner, cards, update }) => {
+const Board = ({ name, owner, cards, board_id, update }) => {
   const onBoardNameClick = () => {
-    update({ name, owner, cards });
+    update({ name, owner, cards, board_id });
   };
 
   return <li onClick={onBoardNameClick}>{name}</li>;

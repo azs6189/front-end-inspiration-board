@@ -4,6 +4,7 @@ import BoardList from './components/BoardList.js';
 import Card from './components/Card.js';
 import BoardForm from './components/BoardForm.js';
 import CardForm from './components/CardForm.js';
+import Alert from './components/Alert.js';
 import axios from 'axios';
 
 const URL = 'http://localhost:5000';
@@ -13,6 +14,7 @@ function App() {
     title: '',
     owner: '',
     cards: [],
+    board_id: null,
   });
   const [boards, setBoards] = useState([]);
   const [cards, setCards] = useState([]);
@@ -20,6 +22,8 @@ function App() {
     setActiveBoard(boardData);
     setCards(boardData.cards);
   };
+  const [alert, setAlert] = useState(null);
+  const [boardFormHide, setBoardFormHide] = useState(false);
 
   useEffect(() => {
     axios
@@ -37,15 +41,6 @@ function App() {
       })
       .catch((err) => console.log(err));
   }, [activeBoard]);
-
-  // BoardForm
-  //// Board form has inputs for title and owner, both required
-  //// Submitting the new board form creates a new board
-  //// Board form can be hidden/unhidden with a button
-
-  // CardForm
-  //// Card form has an input for message
-  //// Submitting creates a new card associated with the active board
 
   const onCardLike = (card_id) => {
     axios
@@ -69,6 +64,51 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  const displayError = (err) => {
+    setAlert(err.response.data.error);
+    setTimeout(() => {
+      setAlert(null);
+    }, 5000);
+  };
+
+  const addBoard = (data) => {
+    axios
+      .post(`${URL}/boards`, data)
+      .then((response) => {
+        setBoards([...boards, response.data]);
+      })
+      .catch((err) => {
+        displayError(err);
+      });
+  };
+
+  const addCard = (data) => {
+    axios
+      .post(`${URL}/boards/${activeBoard.board_id}/cards`, data)
+      .then((response) => {
+        setCards([...cards, response.data]);
+      })
+      .catch((err) => {
+        displayError(err);
+      });
+  };
+
+  const handleSort = (event) => {
+    let newCards = [...cards];
+    if (event.target.value === 'id') {
+      newCards.sort((a, b) => (a.card_id > b.card_id ? 1 : -1));
+      setCards(newCards);
+    } else if (event.target.value === 'name') {
+      newCards.sort((a, b) => (a.message > b.message ? 1 : -1));
+      setCards(newCards);
+    } else if (event.target.value === 'likes') {
+      newCards.sort((a, b) => (a.likes_count < b.likes_count ? 1 : -1));
+      setCards(newCards);
+    } else {
+      console.log('no match');
+    }
+  };
+
   return (
     <div className='App'>
       <h1>Inspiration Board</h1>
@@ -80,6 +120,12 @@ function App() {
         {activeBoard.name} - {activeBoard.owner}
       </p>
       <h2>Cards for {activeBoard.name}</h2>
+      <label htmlFor='sort'>Choose a sorting option:</label>
+      <select name='sort' id='sort' onChange={handleSort}>
+        <option value='id'>ID</option>
+        <option value='name'>Name</option>
+        <option value='likes'>Number of likes</option>
+      </select>
       <ul>
         {cards.map((card) => {
           return (
@@ -92,6 +138,16 @@ function App() {
           );
         })}
       </ul>
+      <Alert message={alert} />
+      <BoardForm addBoard={addBoard} hidden={boardFormHide} />
+      <button
+        onClick={() => {
+          setBoardFormHide(!boardFormHide);
+        }}
+      >
+        {boardFormHide ? 'Show' : 'Hide'}
+      </button>
+      <CardForm addCard={addCard} />
     </div>
   );
 }
