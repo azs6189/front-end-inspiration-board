@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import TestBoards from './data/TestBoards.json';
 import BoardList from './components/BoardList.js';
 import Card from './components/Card.js';
+import BoardForm from './components/BoardForm.js';
+import CardForm from './components/CardForm.js';
 import axios from 'axios';
 
 const URL = 'http://localhost:5000';
