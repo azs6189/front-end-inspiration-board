@@ -10,7 +10,7 @@ const Card = ({ card, onLike, onDelete }) => {
         {'  '}❤️
       </span>
       {'  '}
-      <button onClick={() => onLike(card)}>+1</button>
+      <button onClick={() => onLike(card.card_id)}>+1</button>
       <button onClick={() => onDelete(card.card_id)}>delete</button>
     </div>
   );

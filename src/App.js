@@ -46,13 +46,13 @@ function App() {
   //// Card form has an input for message
   //// Submitting creates a new card associated with the active board
 
-  const onCardLike = (card) => {
+  const onCardLike = (card_id) => {
     axios
-      .put(`${URL}/cards/${card.card_id}/add_like`)
+      .put(`${URL}/cards/${card_id}/add_like`)
       .then((response) => {
         setCards(
-          cards.map((newCard) => {
-            return newCard.card_id === card.card_id ? response.data : newCard;
+          cards.map((card) => {
+            return card.card_id === card_id ? response.data : card;
           })
         );
       })
@@ -63,7 +63,7 @@ function App() {
     axios
       .delete(`${URL}/cards/${card_id}`)
       .then(() => {
-        setCards(cards.filter((card) => card.card_id != card_id));
+        setCards(cards.filter((card) => card.card_id !== card_id));
       })
       .catch((err) => console.log(err));
   };
