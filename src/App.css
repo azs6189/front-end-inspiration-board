@@ -1,38 +1,89 @@
 .App {
-  text-align: center;
+  padding: 3vw;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+li {
+  list-style: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+ol {
+  min-width: 150%;
+  max-height: 150px;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 10px;
+  border: 1px solid black;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
   display: flex;
   flex-direction: column;
+}
+
+.boards__form {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  width: 100%;
+}
+
+.cards__list {
+  display: flex;
+  flex-direction: row;
+}
+
+.cards__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
+}
+
+.boards__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  max-height: 50%;
+}
+
+.title {
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  background-color: rgb(240, 240, 104);
+  padding-left: 35px;
+  padding-right: 35px;
+  display: inline-block;
+  transform: rotate(-5deg) skew(-10deg);
+  margin-bottom: 2vh;
+}
+
+h2 {
+  border: 1px solid black;
+  padding: 20px;
+  box-shadow: -10px 5px black;
+  display: inline-block;
+}
+
+.card {
+  background-color: rgb(240, 240, 104);
+  width: 250px;
+  aspect-ratio: 1 / 1;
+  display: inline-flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 5px;
+  text-align: center;
+  overflow-wrap: break-word;
 }
 
-.App-link {
-  color: #61dafb;
+.card__sort {
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hidden {
+  display: hide;
 }

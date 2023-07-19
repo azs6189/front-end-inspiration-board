@@ -17,7 +17,6 @@ const BoardList = ({ data, boardUpdate }) => {
   });
   return (
     <React.Fragment>
-      <h2>Boards</h2>
       {boards}
     </React.Fragment>
   );

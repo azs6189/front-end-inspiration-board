@@ -1,3 +1,5 @@
+import './Alert.css';
+
 const Alert = ({ message }) => {
   if (!message) {
     return null;

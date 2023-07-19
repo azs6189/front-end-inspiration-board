@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import './BoardForm.css';
 
 const BoardForm = ({ addBoard, hidden }) => {
   const [boardData, setBoardData] = useState({ title: '', owner: '' });

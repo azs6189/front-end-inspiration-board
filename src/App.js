@@ -111,43 +111,66 @@ function App() {
 
   return (
     <div className='App'>
+      <div className='title'>
       <h1>Inspiration Board</h1>
-      <ol>
-        <BoardList data={boards} boardUpdate={onBoardSelect} />
-      </ol>
-      <h2>Selected Board</h2>
-      <p>
-        {activeBoard.name} - {activeBoard.owner}
-      </p>
-      <h2>Cards for {activeBoard.name}</h2>
-      <label htmlFor='sort'>Choose a sorting option:</label>
-      <select name='sort' id='sort' onChange={handleSort}>
-        <option value='id'>ID</option>
-        <option value='name'>Name</option>
-        <option value='likes'>Number of likes</option>
-      </select>
-      <ul>
-        {cards.map((card) => {
-          return (
-            <Card
-              card={card}
-              key={card.card_id}
-              onLike={onCardLike}
-              onDelete={onCardDelete}
-            />
-          );
-        })}
-      </ul>
-      <Alert message={alert} />
-      <BoardForm addBoard={addBoard} hidden={boardFormHide} />
-      <button
-        onClick={() => {
-          setBoardFormHide(!boardFormHide);
-        }}
-      >
-        {boardFormHide ? 'Show' : 'Hide'}
-      </button>
-      <CardForm addCard={addCard} />
+      </div>
+      <div className="container">
+        <div className="boards__container">
+          <div className="board__list">
+          <h2>Boards</h2> 
+          <ol>
+            <BoardList data={boards} boardUpdate={onBoardSelect} />
+          </ol>
+          </div>
+          <div class_name="boards__selected">
+          <h2>Selected Board</h2>
+          <p>
+            {activeBoard.name} - {activeBoard.owner}
+          </p>
+          </div>
+          <div className='boards__form'>
+            <h2>New Board</h2>
+          <BoardForm addBoard={addBoard} hidden={boardFormHide} />
+          <button
+            onClick={() => {
+              setBoardFormHide(!boardFormHide);
+            }}
+          >
+            {boardFormHide ? 'Show' : 'Hide'}
+          </button>
+          </div>
+        </div>
+        <Alert message={alert} />
+        <div className={`cards__container ${activeBoard.board_id == null ? 'hidden' : ''}`}>
+          <h2>Cards for {activeBoard.name}</h2>
+          <div className='card__sort'>
+            <label htmlFor='sort'>Choose a sorting option:{'  '}</label>
+            <select name='sort' id='sort' onChange={handleSort}>
+              <option value='id'>ID</option>
+              <option value='name'>Name</option>
+              <option value='likes'>Number of likes</option>
+          </select>
+          </div>
+          <div className='cardForm'>
+          <CardForm addCard={addCard} />
+        </div>
+          
+    </div>
+    <div className={`cards__list ${activeBoard.board_id == null ? 'hidden' : ''}`}>
+          <ul>
+            {cards.map((card) => {
+              return (
+                <Card
+                  card={card}
+                  key={card.card_id}
+                  onLike={onCardLike}
+                  onDelete={onCardDelete}
+                />
+              );
+            })}
+          </ul>
+          </div>
+    </div>
     </div>
   );
 }
