@@ -22,13 +22,18 @@ ol {
 
 .boards__form {
   width: 30%;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 10px; */
+}
+
+form {
+  margin-top: 10px;
 }
 
 input {
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .cards__list {
@@ -82,6 +87,10 @@ h2 {
 .card__sort {
   display: flex;
   flex-direction: column;
+}
+
+.card_form {
+  width: 25%;
 }
 
 .hidden {

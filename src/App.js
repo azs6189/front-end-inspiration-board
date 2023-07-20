@@ -151,7 +151,7 @@ function App() {
               <option value='likes'>Number of likes</option>
           </select>
           </div>
-          <div className='cardForm'>
+          <div className='card_form'>
           <CardForm addCard={addCard} />
         </div>
           
