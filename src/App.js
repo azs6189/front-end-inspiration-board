@@ -129,7 +129,7 @@ function App() {
           </p>
           </div>
           <div className='boards__form'>
-            <h2>New Board</h2>
+            <h2>Create A New Board</h2>
           <BoardForm addBoard={addBoard} hidden={boardFormHide} />
           <button
             onClick={() => {
