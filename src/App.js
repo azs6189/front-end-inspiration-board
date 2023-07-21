@@ -152,6 +152,7 @@ function App() {
           </select>
           </div>
           <div className='card_form'>
+            <h2>Create A New Card</h2>
           <CardForm addCard={addCard} />
         </div>
           
