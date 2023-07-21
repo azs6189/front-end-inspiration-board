@@ -8,7 +8,7 @@ import Alert from './components/Alert.js';
 import axios from 'axios';
 
 // const URL = 'http://localhost:5000';
-const URL = 'https://back-end-inspiration-board-dc6m.onrender.com/';
+const URL = 'https://back-end-inspiration-board-dc6m.onrender.com';
 
 function App() {
 	const [activeBoard, setActiveBoard] = useState({
