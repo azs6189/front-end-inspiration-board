@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/front-end-inspiration-board/static/css/main.c84110fb.css",
+    "main.js": "/front-end-inspiration-board/static/js/main.4c3b3f97.js",
+    "static/js/787.7ab17afa.chunk.js": "/front-end-inspiration-board/static/js/787.7ab17afa.chunk.js",
+    "index.html": "/front-end-inspiration-board/index.html",
+    "main.c84110fb.css.map": "/front-end-inspiration-board/static/css/main.c84110fb.css.map",
+    "main.4c3b3f97.js.map": "/front-end-inspiration-board/static/js/main.4c3b3f97.js.map",
+    "787.7ab17afa.chunk.js.map": "/front-end-inspiration-board/static/js/787.7ab17afa.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c84110fb.css",
+    "static/js/main.4c3b3f97.js"
+  ]
+}
